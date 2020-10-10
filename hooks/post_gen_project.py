@@ -78,7 +78,7 @@ def set_django_secret_key(file_path):
 
 
 def set_flags_in_envs():
-    django_secret_key_envs_path = os.path.join('.env')
+    django_secret_key_envs_path = os.path.join('.env.sample')
     set_django_secret_key(django_secret_key_envs_path)
 
 
