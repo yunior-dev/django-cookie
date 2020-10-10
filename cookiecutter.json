@@ -1,0 +1,8 @@
+{
+  "project_name": "My Project",
+  "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '-')|replace('.', '-')|trim() }}",
+  "description": "{{ cookiecutter.project_name }} app source code.",
+  "author_name": "Yunior Espinal",
+  "read_dot_env_file": "False",
+  "debug": "True"
+}

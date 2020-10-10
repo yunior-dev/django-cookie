@@ -1,0 +1,32 @@
+{% raw %}{% load mix %}{% endraw %}
+{% raw %}{% load static %}{% endraw %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="author" content="{{ cookiecutter.author_name }}" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% raw %}{% static 'assets/favicons/favicon.png' %}{% endraw %}" />
+
+    <title>Django-Vue</title>
+
+    <!-- Scripts -->
+    <script src="{% raw %}{% mix 'js/app.js' 'static' %}{% endraw %}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% raw %}{% mix 'css/app.css' 'static' %}{% endraw %}" />
+  </head>
+
+  <body>
+    <div id="app">
+      <App></App>
+    </div>
+  </body>
+</html>
