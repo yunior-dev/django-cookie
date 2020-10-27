@@ -47,7 +47,7 @@ LOCALE_PATHS = [str(ROOT_DIR / 'locale')]
 # URLS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
-ROOT_URLCONF = 'config.main'
+ROOT_URLCONF = 'config.urls'
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = 'config.wsgi.application'
 
