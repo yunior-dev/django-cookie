@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import NotFound from './errors/NotFound.vue'
+import NotFound from './errors/404.vue'
 
 import Welcome from './pages/Welcome.vue'
 
