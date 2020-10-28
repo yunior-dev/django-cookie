@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "watch": "npm run build -- --watch",
-    "start": "npm run build",
+    "watch": "yarn build -- --watch",
+    "start": "yarn build",
     "build": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
