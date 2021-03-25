@@ -85,7 +85,7 @@ INSTALLED_APPS = DJANGO_APPS + VENDOR_APPS + LOCAL_APPS
 # https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
 PASSWORD_HASHERS = [
     # https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with-django
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
@@ -196,8 +196,8 @@ X_FRAME_OPTIONS = 'DENY'
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL.
-ADMIN_URL = 'admin/'
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
+ADMIN_URL = 'admin/'
 
 
 # DJANGO REST FRAMEWORK
