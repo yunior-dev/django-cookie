@@ -18,7 +18,8 @@ flake8-isort = ">=4.0.0,<4.1"
 django-debug-toolbar = ">=2.2,<2.3"
 
 [scripts]
-makemigration = "python manage.py makemigration"
+createsuperuser = "python manage.py createsuperuser"
+makemigrations = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
 server = "python manage.py runserver"
 startapp = "python manage.py startapp"
