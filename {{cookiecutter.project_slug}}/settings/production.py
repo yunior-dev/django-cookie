@@ -6,15 +6,13 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env('APP_SECRET_KEY')
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list('APP_ALLOWED_HOST', default=['example.com'])
-
+ALLOWED_HOSTS = env.list('APP_ALLOWED_HOST', default=['{{cookiecutter.domain_name}}'])
 
 # DATABASES
 # ------------------------------------------------------------------------------
-DATABASES['default'] = env.db('DATABASE_URL')  # noqa F405
+DATABASES = {'default': env.db('DATABASE_URL'),} #  noqa F405
 DATABASES['default']['ATOMIC_REQUESTS'] = True  # noqa F405
-DATABASES['default']['CONN_MAX_AGE'] = env.int('CONN_MAX_AGE', default=60)  # noqa F405
-
+DATABASES['default']['CONN_MAX_AGE'] = env.int('CONN_MAX_AGE', default=600)  # noqa F405
 
 # SECURITY
 # ------------------------------------------------------------------------------

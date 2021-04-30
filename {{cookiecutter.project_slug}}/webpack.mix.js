@@ -27,7 +27,7 @@ if (process.argv.includes('--browser-sync')) {
 }
 
 // Now you can use full mix api.
-mix.js(`${resourcesPath}/js/app.js`, `${staticPath}/js/`)
+mix.js(`${resourcesPath}/js/app.js`, `${staticPath}/js/`).vue()
 mix.postCss(`${resourcesPath}/css/app.css`, `${staticPath}/css/`, [
   require('postcss-import'),
   require('tailwindcss'),

@@ -1,4 +1,6 @@
+<!-- Load DjangoMix tag -->
 {% raw %}{% load mix %}{% endraw %}
+<!-- Load Django Static tag -->
 {% raw %}{% load static %}{% endraw %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,24 +11,25 @@
     <meta name="author" content="{{ cookiecutter.author_name }}" />
 
     <!-- Favicon -->
-    <link rel="icon" href="{% raw %}{% static 'assets/favicons/favicon.png' %}{% endraw %}" />
+    <link rel="icon" href="{% raw %}{% static 'assets/favicons/favicon.ico' %}{% endraw %}" />
 
-    <title>Django-Vue</title>
-
-    <!-- Scripts -->
-    <script src="{% raw %}{% mix 'js/app.js' 'static' %}{% endraw %}" defer></script>
+    <title>
+      {% raw %}{% block title %}{% endblock %}{% endraw %} | {{ cookiecutter.project_name }}
+    </title>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
     <!-- Styles -->
     <link rel="stylesheet" href="{% raw %}{% mix 'css/app.css' 'static' %}{% endraw %}" />
-  </head>
 
+    <!-- Scripts -->
+    <script src="{% raw %}{% mix 'js/app.js' 'static' %}{% endraw %}" defer></script>
+  </head>
   <body>
-    <div id="app">
-      <App></App>
-    </div>
+    <main>
+      <!-- Content -->
+      {% raw %}{% block content %}{% endblock %}{% endraw %}
+    </main>
   </body>
 </html>

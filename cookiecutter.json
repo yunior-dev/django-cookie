@@ -3,6 +3,12 @@
   "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '-')|replace('.', '-')|trim() }}",
   "description": "{{ cookiecutter.project_name }} app source code.",
   "author_name": "Yunior Espinal",
-  "read_dot_env_file": "False",
-  "debug": "True"
+  "domain_name": "example.com",
+  "database": ["PostgreSQL", "SQLite3"],
+  "use_async": "n",
+  "use_vuejs": "n",
+  "use_whitenoise": "y",
+  "use_heroku": "y",
+  "read_dot_env_file": "y",
+  "debug": "y"
 }

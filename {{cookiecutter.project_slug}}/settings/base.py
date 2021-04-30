@@ -1,15 +1,18 @@
 """
 Base settings to build other settings file upon.
 """
-import environ
 from pathlib import Path
+
+from django.conf.locale.en import formats as en_formats
+
+import environ
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 # apps/ directory
 APPS_DIR = ROOT_DIR / 'apps'
 
-# resource/ directory
+# resources/ directory
 RESOURCES_DIR = ROOT_DIR / 'resources'
 
 env = environ.Env()
@@ -65,14 +68,14 @@ DJANGO_APPS = [
     # 'django.contrib.humanize', # Handy template tags
 ]
 VENDOR_APPS = [
-    'corsheaders',
     'djangomix',
-    'rest_framework',
-    'rest_framework.authtoken',
     # Third party apps go here.
 ]
 LOCAL_APPS = [
+    {%- if cookiecutter.use_vuejs == "y" %}
     'apps.client',
+    {%- endif %}
+    'apps.core',
     # 'apps.users',
     # Your apps: custom apps go here.
 ]
@@ -112,7 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    {%- if cookiecutter.use_whitenoise == "y" %}
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    {%- endif %}
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -127,7 +132,7 @@ MIDDLEWARE = [
 # STATIC
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = str(ROOT_DIR / 'staticfiles/dist')
+STATIC_ROOT = str(ROOT_DIR / 'staticfiles')
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
@@ -138,7 +143,13 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
+{%- if cookiecutter.use_whitenoise == "y" %}
 STATIC_URL = '/static/'
+{%- endif %}
+
+# WHITENOISE STORAGE
+# http://whitenoise.evans.io/en/stable/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # MEDIA
@@ -200,19 +211,20 @@ X_FRAME_OPTIONS = 'DENY'
 ADMIN_URL = 'admin/'
 
 
-# DJANGO REST FRAMEWORK
-# -------------------------------------------------------------------------------
-# django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
-}
+# DATE FORMATS
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/3.1/ref/settings/#date-input-formats
+DATE_INPUT_FORMATS = ['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y']
+en_formats.DATE_FORMAT = 'N j, Y'
 
-# django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
-CORS_URLS_REGEX = r'^/api/.*$'
+
+# AUTO PRIMARY KEY FIELD
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/3.2/releases/3.2/#
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+# Replace the default user model with the custom model.
+# AUTH_USER_MODEL = 'core.User'
 
 
 # Your stuff...

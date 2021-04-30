@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import os
 import random
+import shutil
 import string
 
 try:
@@ -17,6 +18,52 @@ WARNING = '\x1b[1;33m [WARNING]: '
 INFO = '\x1b[1;33m [INFO]: '
 HINT = '\x1b[3;33m'
 SUCCESS = '\x1b[1;32m [SUCCESS]: '
+
+
+def remove_vue_files():
+    file_names = [
+        os.path.join('templates', 'index.html')
+    ]
+    for file_name in file_names:
+        os.remove(file_name)
+    remove_vue_related_directories()
+
+
+def remove_vue_related_directories():
+    shutil.rmtree(os.path.join('apps', 'client'))
+    shutil.rmtree(os.path.join('resources', 'vue'))
+
+
+def remove_non_vue_files():
+    file_names = [
+        os.path.join('templates', 'welcome.html')
+    ]
+    for file_name in file_names:
+        os.remove(file_name)
+    remove_none_vue_related_directories()
+
+
+def remove_none_vue_related_directories():
+    shutil.rmtree(os.path.join('templates', 'layouts'))
+
+
+def remove_heroku_files():
+    file_names = ['Procfile', 'runtime.txt']
+    for file_name in file_names:
+        os.remove(file_name)
+    remove_heroku_build_hooks()
+
+
+def remove_heroku_build_hooks():
+    shutil.rmtree('bin')
+
+
+def remove_async_files():
+    file_names = [
+        os.path.join('config', 'asgi.py')
+    ]
+    for file_name in file_names:
+        os.remove(file_name)
 
 
 def generate_random_string(
@@ -50,7 +97,7 @@ def set_flag(file_path, flag, value=None, formatted=None, *args, **kwargs):
         if random_string is None:
             print(
                 "We couldn't find a secure pseudo-random number generator on your system. "
-                "Please, make sure to manually {} later.".format(flag)
+                'Please, make sure to manually {} later.'.format(flag)
             )
             random_string = flag
         if formatted is not None:
@@ -78,7 +125,7 @@ def set_django_secret_key(file_path):
 
 
 def set_flags_in_envs():
-    django_secret_key_envs_path = os.path.join('.env.sample')
+    django_secret_key_envs_path = os.path.join('.env')
     set_django_secret_key(django_secret_key_envs_path)
 
 
@@ -90,7 +137,19 @@ def main():
     set_flags_in_envs()
     set_flags_in_settings_files()
 
-    print(SUCCESS + 'Project initialized, keep up the good work!' + TERMINATOR)
+    if '{{ cookiecutter.use_vuejs }}'.lower() == 'n':
+        remove_vue_files()
+
+    if '{{ cookiecutter.use_vuejs }}'.lower() == 'y':
+        remove_non_vue_files()
+
+    if '{{ cookiecutter.use_heroku }}'.lower() == 'n':
+        remove_heroku_files()
+
+    if '{{ cookiecutter.use_async }}'.lower() == 'n':
+        remove_async_files()
+
+    print(SUCCESS + 'Cookies are ready to eat. 🍪🍪' + TERMINATOR)
 
 
 if __name__ == '__main__':
