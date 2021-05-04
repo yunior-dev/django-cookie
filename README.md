@@ -21,6 +21,19 @@ My version is inspire by Daniel Roy Greenfeld's [cookiecutter-django](https://gi
 
 ---
 
+#### _Note: Django 3.2 Improperly configure cannot import 'App_Name'._
+
+This error is due to the new way Django 3.2 handles AppConfig, and it only happens when using the apps module to store your applications.
+
+`AppConfig.name` should be the full Python path to the application. Since you appear to have `users` inside an `apps` module, you should use `'apps.users'` instead of `'users'`.
+
+```
+class UsersConfig(AppConfig):
+    name = 'apps.users'
+```
+
+---
+
 ## Usage
 
 First make sure you have [Cookiecutter](https://cookiecutter.readthedocs.io/en/1.7.2/installation.html#install-cookiecutter), [Pipenv](https://pipenv.pypa.io/en/latest/), and [Node.js](https://nodejs.org/en/) installed:
@@ -274,7 +287,7 @@ We are now going to add the necessary enviroment variables the app needs to run.
 
 Add the following variables:
 
-*Note Heroku will add the DATABASE_URL when you provisioned it in step 3. Add the DISABLE_COLLECTSTATIC and DJANGO_SETTINGS_MODULE as shown below, but the rest should be change to your specifications specially the secret key, there is a genkey command you can use by running the `python manage.py genkey`.*
+_Note Heroku will add the DATABASE_URL when you provisioned it in step 3. Add the DISABLE_COLLECTSTATIC and DJANGO_SETTINGS_MODULE as shown below, but the rest should be change to your specifications specially the secret key, there is a genkey command you can use by running the `python manage.py genkey`._
 
 ```
 APP_ALLOWED_HOST          = example.com,example.heroku.com
@@ -302,7 +315,7 @@ To deploy the application:
 
 4. For the next part, make sure Heroku is connected to your GitHub account [click here](https://devcenter.heroku.com/articles/github-integration#enabling-github-integration) for instruction.
 
-5. In the **Connect to GitHub**  section, use the search field to search for your project name in GitHub. Once located, click on the `Connect` button next to the project name.
+5. In the **Connect to GitHub** section, use the search field to search for your project name in GitHub. Once located, click on the `Connect` button next to the project name.
 
 ![Screen-Shot](Screen-Shot/Screen-Shot-9.png)
 
@@ -328,7 +341,7 @@ git push heroku main
 
 To automate future updates to your app, go to the **Automatic deploys** section and click `Enable Automatic Deploys`, and that's it. Next time you push your project to GitHub, Heroku will automatically run a deployment.
 
-*You can always disable this function.*
+_You can always disable this function._
 
 ![Screen-Shot](Screen-Shot/Screen-Shot-11.png)
 
@@ -340,16 +353,18 @@ If using the django admin site, you will need to create a super user. To do so, 
 heroku run python manage.py createsuperuser -a APP-NAME
 ```
 
-*Note the **-a** follow by the Heroku **APP-NAME**. This is useful because it allows you to run any command without getting the application remote repository from Heroku.*
+_Note the **-a** follow by the Heroku **APP-NAME**. This is useful because it allows you to run any command without getting the application remote repository from Heroku._
 
 ##### Other useful Heroku Commands
 
 Allows the user to connect to the Heroku application bash terminal. To Exit run the `exit` commnad.
+
 ```
 heroku run bash -a APP-NAME
 ```
 
 Allows the user to see a log of the application.
+
 ```
 heroku logs --tail -a APP-NAME
 ```
@@ -358,7 +373,7 @@ heroku logs --tail -a APP-NAME
 
 ## Project Directories
 
-A layout of directories. *Note that depending on the options selected, you will not see every directory and file below.*
+A layout of directories. _Note that depending on the options selected, you will not see every directory and file below._
 
 When a new django app is created, you must drag it manually into the **apps** directory.
 
