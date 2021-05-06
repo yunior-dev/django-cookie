@@ -25,7 +25,7 @@ My version is inspire by Daniel Roy Greenfeld's [cookiecutter-django](https://gi
 
 This error is due to the new way Django 3.2 handles AppConfig, and it only happens when using the apps module to store your applications.
 
-`AppConfig.name` should be the full Python path to the application. Since you appear to have `users` inside an `apps` module, you should use `'apps.users'` instead of `'users'`.
+`AppConfig.name` should be the full path to the application. Example: since `users` is inside the `apps` module, in the AppConfig class in side apps.py you should use `'apps.users'` instead of `'users'`.
 
 ```
 class UsersConfig(AppConfig):
