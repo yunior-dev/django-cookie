@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import NotFound from './errors/404.vue'
 
+import NotFound404 from './errors/NotFound404.vue'
 import Welcome from './pages/Welcome.vue'
 
 Vue.use(VueRouter)
@@ -24,7 +24,7 @@ export default new VueRouter({
    {
     path: '*',
     name: '404 Not Found',
-    component: NotFound,
+    component: NotFound404,
     meta: { title: '404 Not Found' }
   }
   ]
