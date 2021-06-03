@@ -49,4 +49,4 @@ test = "python manage.py test"
 # ------------------------------------------------------------------------------
 
 [requires]
-python_version = "3.9.4"
+python_version = "3.9"
