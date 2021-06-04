@@ -20,7 +20,7 @@ pytz = "==2020.1"
 {%- if cookiecutter.use_whitenoise == "y" %}
 # Simplified static file serving - # http://whitenoise.evans.io/en/stable/
 whitenoise = ">=5.2.0,<5.3"
-{% endif %}
+{%- endif %}
 {%- if cookiecutter.use_async == 'y' %}
 # uvicorn https://github.com/encode/uvicorn
 uvicorn = ">=0.13.4,<0.14"
